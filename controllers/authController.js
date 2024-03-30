@@ -28,9 +28,11 @@ module.exports = {
             const depassword = decryptedpass.toString(CryptoJS.enc.Utf8);
 
             depassword !==req.body.password && res.status(401).json("Wrong password");
-            req.status(200).json(user);
+
+            const{password,__v,createdAt, ...others} = user._doc;
+            res.status(200).json(others);
         }catch(error){
-            req.status(500)
+            req.status(500).json({error:"An error"})
         }
 
     },
