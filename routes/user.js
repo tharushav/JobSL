@@ -4,9 +4,9 @@ const { verifyAndAuthorization,verifyToken, verifyAndAdmin } = require('../middl
 
 
 
-router.put('/:id',verifyAndAuthorization,userController.updatedUser);
-router.delete('/:id',verifyAndAuthorization,userController.deleteUser);
-router.get('/:id',verifyAndAuthorization,userController.getUser);
+router.put('/',verifyAndAuthorization,userController.updatedUser);
+router.delete('/',verifyAndAuthorization,userController.deleteUser);
+router.get('/',verifyAndAuthorization,userController.getUser);
 router.get('/',verifyAndAdmin,userController.getAllUser);
 
 module.exports = router

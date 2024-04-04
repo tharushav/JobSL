@@ -9,7 +9,7 @@ module.exports = {
 
          try{
             const updatedUser =await User.findByIdAndUpdate(
-                req.params.id,{
+                req.user.id,{
                     $set:req.body
                 },{new:true}
             );
@@ -22,7 +22,7 @@ module.exports = {
 
     deleteUser:async(req,res)=>{
         try{
-            await User.findByIdAndDelete(req.params.id)
+            await User.findByIdAndDelete(req.user.id)
             res.status(200).json('Account deleted ')
         }catch(error){
             res.status(500).json(error)
@@ -32,7 +32,7 @@ module.exports = {
 
     getUser:async(req,res)=>{
         try{
-            const user = await User.findById(req.params.id);
+            const user = await User.findById(req.user.id);
             const {password,__v,createdAt,updatedAt, ...userData}= user._doc;
             res.status(200).json(userData)
         }catch(error){
