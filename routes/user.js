@@ -4,7 +4,7 @@ const { verifyAndAuthorization,verifyToken, verifyAndAdmin } = require('../middl
 
 
 
-router.put('/',verifyAndAuthorization,userController.updatedUser);
+router.put('/',verifyAndAuthorization,userController.updateUser);
 router.delete('/',verifyAndAuthorization,userController.deleteUser);
 router.get('/',verifyAndAuthorization,userController.getUser);
 router.get('/',verifyAndAdmin,userController.getAllUser);
