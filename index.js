@@ -1,20 +1,22 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const port = 3000
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const jobRouter = require('./routes/job')
-const authRoute = require('./routes/auth')
-const userRoute = require('./routes/user')
-const bodyParser = require('body-parser')
+
+const jobRouter = require('./routes/job');
+const authRoute = require('./routes/auth');
+const userRoute = require('./routes/user');
+const bodyParser = require('body-parser');
 
 
 dotenv.config();
-
-
-mongoose.connect(process.env.MONGO_URL)
- .then(()=>console.log('Connected to jobsl db'))
- .catch((err)=>console.log(err));
+const mongoose = require('mongoose');
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log('connected to the db'))
+  .catch((err) => {
+    console.log(err);
+  });
 
  app.use(bodyParser.json())
  app.use(bodyParser.urlencoded({extended:true}))
