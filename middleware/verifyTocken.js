@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
 
 const verifyAndAuthorization = (req, res, next) => {
     verifyToken(req, res, () => {
-        if (req.user.id === req.params.id) {
+        if (req.user.id || req.user.isAdmin) {
             next();
         } else {
            return res.status(403).json({status: false, message: "You do not have permission to access this route"});
@@ -37,4 +37,15 @@ const verifyAndAdmin = (req,res,next)=>{
         }
     })
 }
-module.exports = {verifyToken,verifyAndAuthorization,verifyAndAdmin};
+
+
+const verifyTokenAndAgent = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.isAgent || req.user.isAdmin) {
+            next();
+        } else {
+           return res.status(403).json({status: false, message: "You do not have permission to access this route"});
+        }
+    });
+};
+module.exports = {verifyToken,verifyAndAuthorization,verifyAndAdmin,verifyTokenAndAgent};
